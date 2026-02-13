@@ -12,9 +12,9 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     const formatPrice = (price: number) => {
-        return new Intl.NumberFormat('es-AR', {
+        return new Intl.NumberFormat('es-PY', {
             style: 'currency',
-            currency: 'ARS',
+            currency: 'PYG',
             minimumFractionDigits: 0,
         }).format(price);
     };
@@ -135,7 +135,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                             Finalizar Compra
                         </button>
                         <p className="text-xs text-center text-slate-600">
-                            🔒 Pago seguro • Envío gratis en compras mayores a $50,000
+                            🔒 Pago seguro • Envío gratis en compras mayores a ₲ 1.700.000
                         </p>
                     </div>
                 )}

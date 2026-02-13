@@ -131,15 +131,22 @@ const Ecommerce: React.FC = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
+            {/* Logo - Clickable */}
+            <button
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setSearchTerm('');
+                setSelectedCategory('all');
+              }}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/30">
                 <span className="material-icons text-white">bolt</span>
               </div>
               <span className="text-2xl font-bold tracking-tight text-slate-900">
                 Electro<span className="gradient-text">Store</span>
               </span>
-            </div>
+            </button>
 
             {/* Search Bar */}
             <div className="hidden md:flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 flex-1 max-w-md mx-8">
@@ -226,7 +233,7 @@ const Ecommerce: React.FC = () => {
           <div className="flex items-center justify-center gap-3">
             <span className="material-icons text-primary animate-pulse">local_offer</span>
             <p className="text-sm md:text-base font-semibold text-slate-900">
-              <span className="text-primary">¡SUPER OFERTAS!</span> Hasta 50% de descuento en electrodomésticos seleccionados | Envío gratis en compras mayores a $50,000
+              <span className="text-primary">¡SUPER OFERTAS!</span> Hasta 50% de descuento en electrodomésticos seleccionados | Envío gratis en compras mayores a ₲ 1.700.000
             </p>
           </div>
         </div>
@@ -244,8 +251,8 @@ const Ecommerce: React.FC = () => {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2.5 rounded-lg font-semibold text-sm whitespace-nowrap transition-all ${selectedCategory === category
-                    ? 'bg-primary text-white shadow-lg shadow-primary/30'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-primary text-white shadow-lg shadow-primary/30'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
                   }`}
               >
                 {category === 'all' ? 'Todos' : category}
@@ -281,51 +288,51 @@ const Ecommerce: React.FC = () => {
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="product-card bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-primary hover:shadow-2xl hover:shadow-primary/10 transition-all">
-                  <div className="relative">
+                <div key={product.id} className="product-card bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all group border border-slate-100">
+                  <div className="relative bg-white p-6">
                     <img
-                      src={`https://images.unsplash.com/${product.img}?w=300&h=300&fit=crop`}
+                      src={`https://images.unsplash.com/${product.img}?w=400&h=400&fit=crop`}
                       alt={product.name}
-                      className="w-full h-56 object-cover"
+                      className="w-full h-56 object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                     <button
                       onClick={() => handleFavoriteClick(product.id)}
-                      className={`absolute top-3 right-3 w-9 h-9 backdrop-blur-sm rounded-full flex items-center justify-center transition-all ${isFavorite(product.id)
+                      className={`absolute top-3 right-3 w-10 h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-all shadow-lg ${isFavorite(product.id)
                           ? 'bg-red-500 hover:bg-red-600'
-                          : 'bg-white/90 hover:bg-primary'
+                          : 'bg-white hover:bg-primary'
                         }`}
                     >
-                      <span className={`material-icons text-sm ${isFavorite(product.id) ? 'text-white' : 'text-slate-700'}`}>
+                      <span className={`material-icons text-sm ${isFavorite(product.id) ? 'text-white' : 'text-slate-700 group-hover:text-white'}`}>
                         {isFavorite(product.id) ? 'favorite' : 'favorite_border'}
                       </span>
                     </button>
                     {product.badge && (
-                      <span className={`absolute top-3 left-3 ${product.badgeColor} text-white text-xs font-bold px-2 py-1 rounded-md`}>
+                      <span className={`absolute top-3 left-3 ${product.badgeColor} text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg`}>
                         {product.badge}
                       </span>
                     )}
                   </div>
-                  <div className="p-4">
-                    <p className={`text-xs ${product.categoryColor} font-semibold mb-1`}>{product.category}</p>
-                    <h3 className="font-bold mb-2 line-clamp-2 text-slate-900">{product.name}</h3>
+                  <div className="p-5 bg-slate-50">
+                    <p className={`text-xs ${product.categoryColor} font-bold mb-2 uppercase tracking-wide`}>{product.category}</p>
+                    <h3 className="font-bold text-base mb-2 line-clamp-2 text-slate-900 min-h-[3rem]">{product.name}</h3>
                     <div className="flex items-center gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
                         <span key={i} className={`material-icons text-sm ${i < product.rating ? 'text-yellow-400' : 'text-slate-300'}`}>star</span>
                       ))}
                       <span className="text-xs text-slate-600 ml-1">({Math.floor(Math.random() * 200) + 50})</span>
                     </div>
-                    <div className="flex items-baseline gap-2 mb-4">
-                      <span className="text-2xl font-bold text-primary">{product.priceFormatted}</span>
+                    <div className="mb-4">
                       {product.oldPriceFormatted && (
-                        <span className="text-sm text-slate-500 line-through">{product.oldPriceFormatted}</span>
+                        <span className="text-sm text-slate-500 line-through block mb-1">{product.oldPriceFormatted}</span>
                       )}
+                      <span className="text-2xl font-bold text-primary block">{product.priceFormatted}</span>
                     </div>
                     <button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-orange-50 hover:bg-primary text-primary hover:text-white font-semibold py-2.5 rounded-lg transition-all flex items-center justify-center gap-2 border border-primary"
+                      className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95"
                     >
                       <span className="material-icons text-sm">add_shopping_cart</span>
-                      Agregar
+                      Agregar al Carrito
                     </button>
                   </div>
                 </div>

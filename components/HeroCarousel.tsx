@@ -14,18 +14,18 @@ interface HeroSlide {
 const heroSlides: HeroSlide[] = [
     {
         id: 1,
-        title: '¡SUPER OFERTAS!',
+        title: 'SUPER OFERTAS',
         subtitle: 'Hasta 50% OFF',
         description: 'En electrodomésticos seleccionados. Aprovechá los mejores precios del año.',
         image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=600&fit=crop',
         cta: 'Ver Ofertas',
-        ctaLink: '#ofertas',
+        ctaLink: '#productos',
         bgGradient: 'from-orange-500 to-red-500'
     },
     {
         id: 2,
         title: 'ENVÍO GRATIS',
-        subtitle: 'En compras mayores a $50.000',
+        subtitle: 'En compras mayores a ₲ 1.700.000',
         description: 'Recibí tus productos en la puerta de tu casa sin costo adicional.',
         image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop',
         cta: 'Comprar Ahora',
@@ -39,7 +39,7 @@ const heroSlides: HeroSlide[] = [
         description: 'Llevá el electrodoméstico que necesitás y pagalo en cómodas cuotas.',
         image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
         cta: 'Conocer Más',
-        ctaLink: '#financiacion',
+        ctaLink: '#productos',
         bgGradient: 'from-purple-500 to-pink-500'
     }
 ];
@@ -154,8 +154,8 @@ const HeroCarousel: React.FC = () => {
                         key={index}
                         onClick={() => goToSlide(index)}
                         className={`transition-all ${index === currentSlide
-                                ? 'w-12 h-3 bg-white'
-                                : 'w-3 h-3 bg-white/40 hover:bg-white/60'
+                            ? 'w-12 h-3 bg-white'
+                            : 'w-3 h-3 bg-white/40 hover:bg-white/60'
                             } rounded-full`}
                     />
                 ))}
